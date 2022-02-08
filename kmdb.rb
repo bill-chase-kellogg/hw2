@@ -87,7 +87,7 @@ Role.destroy_all
 # Do not use hard-coded foreign key IDs.
 
 # Begin People Insert
-# Batman Begins
+
 people_list = {name: "Christopher Nolan"}
 people = Person.new(people_list)
 people.save 
@@ -112,8 +112,6 @@ people_list = {name: "Gary Oldman"}
 people = Person.new(people_list)
 people.save 
 
-# The Dark Knight
-
 people_list = {name: "Heath Ledger"}
 people = Person.new(people_list)
 people.save 
@@ -125,8 +123,6 @@ people.save
 people_list = {name: "Maggie Gyllenhaal"}
 people = Person.new(people_list)
 people.save 
-
-# The Dark Knight Rises
 
 people_list = {name: "Tomy Hardy"}
 people = Person.new(people_list)
@@ -140,16 +136,17 @@ people_list = {name: "Anne Hathaway"}
 people = Person.new(people_list)
 people.save 
 
-# End People
+# End People Insert
 
 # Begin Movie Insert
 
-# Director
+director = People.where({name: "Christopher Nolan"})[0].id
 
 values = {
     title: "Batman Begins",
     year_released: 2005,
     rated: "PG-13"
+    person_id: director
     }
 
 movies = Movie.new(values)
@@ -164,26 +161,29 @@ values = {
 movies = Movie.new(values)
 movies.save
 
-# Insert Movies
-
 values = {
     title: "The Dark Knight Rises",
     year_released: 2012,
     rated: "PG-13"
     }
 
-movies = Movie.new(values)
-movies.save
+    movies = Movie.new(values)
+    movies.save
+
 # End Movie Insert
 
-# Assigning Roles
+# Find Movie IDs
 
-batman_begins = Movie.where({title: "Batman Begins"})[0]
+batman_begins = Movie.where({title: "Batman Begins"})[0].id
+dark_knight = Movie.where({title: "The Dark Knight"})[0].id
+dark_knight_rises = Movie.where({title: "The Dark Knight Rises"})[0].id
+
+#Batman Begins Roles
 
 role = Role.new
 role.character_name = "Bruce Wayne"
 role.save
-role.movie_id = batman_begins.title
+role.movie_id = 
 role.save
 role.person_id = Person.where({name: "Christian Bale"})[0]
 role.save
@@ -196,15 +196,14 @@ puts "Movies"
 puts "======"
 puts ""
 
+# Query the movies data and loop through the results to display the movies output
+
 movies = Movie.all
 
 for movie in movies
     person = Person.where(id: movie.person_id)[0]
-    puts "#{movie.title} #{movie.year_released} #{movie.rating} #{person.name} "
+    puts "#{movie.title} #{movie.year_released} #{movie.rated} #{person.name} "
 end
-
-# Query the movies data and loop through the results to display the movies output
-# TODO!
 
 # Prints a header for the cast output
 puts ""
