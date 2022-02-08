@@ -86,34 +86,6 @@ Role.destroy_all
 # Insert data into your database that reflects the sample data shown above
 # Do not use hard-coded foreign key IDs.
 
-# Begin Movie Insert
-values = {
-    title: "Batman Begins",
-    year_released: 2005,
-    rated: "PG-13"
-    }
-
-movies = Movie.new(values)
-movies.save
-
-values = {
-    title: "The Dark Knight",
-    year_released: 2008,
-    rated: "PG-13"
-    }
-
-movies = Movie.new(values)
-movies.save
-
-values = {
-    title: "The Dark Knight Rises",
-    year_released: 2012,
-    rated: "PG-13"
-    }
-
-movies = Movie.new(values)
-movies.save
-# End Movie Insert
 # Begin People Insert
 # Batman Begins
 people_list = {name: "Christopher Nolan"}
@@ -169,11 +141,50 @@ people = Person.new(people_list)
 people.save 
 
 # End People
+
+# Begin Movie Insert
+
+# Director
+
+values = {
+    title: "Batman Begins",
+    year_released: 2005,
+    rated: "PG-13"
+    }
+
+movies = Movie.new(values)
+movies.save
+
+values = {
+    title: "The Dark Knight",
+    year_released: 2008,
+    rated: "PG-13"
+    }
+
+movies = Movie.new(values)
+movies.save
+
+# Insert Movies
+
+values = {
+    title: "The Dark Knight Rises",
+    year_released: 2012,
+    rated: "PG-13"
+    }
+
+movies = Movie.new(values)
+movies.save
+# End Movie Insert
+
 # Assigning Roles
+
+batman_begins = Movie.where({title: "Batman Begins"})[0]
 
 role = Role.new
 role.character_name = "Bruce Wayne"
-role.movie_id = Movie.where({title: "Batman Begins"})[0]
+role.save
+role.movie_id = batman_begins.title
+role.save
 role.person_id = Person.where({name: "Christian Bale"})[0]
 role.save
 
@@ -184,6 +195,13 @@ role.save
 puts "Movies"
 puts "======"
 puts ""
+
+movies = Movie.all
+
+for movie in movies
+    person = Person.where(id: movie.person_id)[0]
+    puts "#{movie.title} #{movie.year_released} #{movie.rating} #{person.name} "
+end
 
 # Query the movies data and loop through the results to display the movies output
 # TODO!
