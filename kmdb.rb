@@ -20,12 +20,15 @@
 # 
 # There are three deliverables for this assignment, all delivered within
 # this repository and submitted via GitHub and Canvas:
+
 # - Generate the models and migration files to match the domain model from hw1.
 #   Execute the migration files to create the tables in the database. Add the
 #   relevant association methods in each model. (5 points)
+
 # - Insert the "Batman" sample data using ruby code. Do not use hard-coded ids and
 #   delete any existing data beforehand so that each run of this script does not
 #   create duplicate data. (5 points)
+
 # - Query the data and loop through it to display output similar to the following
 #   sample "report". (10 points)
 
