@@ -78,7 +78,7 @@ Role.destroy_all
 
 # Generate models and tables, according to the domain model
 
-# BC Notes //I used 'rails generate model Movies/People/Roles' to create the models
+# Notes //I used 'rails generate model Movies/People/Roles' to create the models
 # Then I set up the tables in db->migrate->create_[model name]
 # Then I ran 'rails db:migrate'
 # I committed the code before and after the migration for easy reference // End of notes for this section
@@ -124,7 +124,7 @@ people_list = {name: "Maggie Gyllenhaal"}
 people = Person.new(people_list)
 people.save 
 
-people_list = {name: "Tomy Hardy"}
+people_list = {name: "Tom Hardy"}
 people = Person.new(people_list)
 people.save 
 
@@ -136,7 +136,7 @@ people_list = {name: "Anne Hathaway"}
 people = Person.new(people_list)
 people.save 
 
-# End People Insert
+# /End People Insert
 
 # Begin Movie Insert
 
@@ -146,7 +146,6 @@ values = {
     title: "Batman Begins",
     year_released: 2005,
     rated: "PG-13"
- 
     }
 
 movies = Movie.new(values)
@@ -157,7 +156,6 @@ values = {
     title: "The Dark Knight",
     year_released: 2008,
     rated: "PG-13"
-   
     }
 
 movies = Movie.new(values)
@@ -168,16 +166,14 @@ values = {
     title: "The Dark Knight Rises",
     year_released: 2012,
     rated: "PG-13"
-  
     }
-
     movies = Movie.new(values)
     movies.person_id = director.id
     movies.save
 
-# End Movie Insert
+# /End Movie Insert
 
-# Find Movie IDs
+# Define Movie Specific Variables for later
 
 batman_begins = Movie.where({title: "Batman Begins"})[0]
 dark_knight = Movie.where({title: "The Dark Knight"})[0]
@@ -191,8 +187,95 @@ role.movie_id = batman_begins.id
 role.person_id = Person.where({name: "Christian Bale"})[0].id
 role.save
 
+role = Role.new
+role.character_name = "Alfred"
+role.movie_id = batman_begins.id
+role.person_id = Person.where({name: "Michael Caine"})[0].id
+role.save
 
-# End of roles assignment
+role = Role.new
+role.character_name = "Ra's Al Ghul"
+role.movie_id = batman_begins.id
+role.person_id = Person.where({name: "Liam Neeson"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Rachel Dawes"
+role.movie_id = batman_begins.id
+role.person_id = Person.where({name: "Katie Holmes"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Commissioner Gordon"
+role.movie_id = batman_begins.id
+role.person_id = Person.where({name: "Gary Oldman"})[0].id
+role.save
+
+# Dark Knight Roles
+
+role = Role.new
+role.character_name = "Bruce Wayne"
+role.movie_id = dark_knight.id
+role.person_id = Person.where({name: "Christian Bale"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Joker"
+role.movie_id = dark_knight.id
+role.person_id = Person.where({name: "Heath Ledger"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Harvey Dent"
+role.movie_id = dark_knight.id
+role.person_id = Person.where({name: "Aaron Eckhart"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Alfred"
+role.movie_id = dark_knight.id
+role.person_id = Person.where({name: "Michael Caine"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Rachel Dawes"
+role.movie_id = dark_knight.id
+role.person_id = Person.where({name: "Maggie Gyllenhaal"})[0].id
+role.save
+
+#Dark Knight Rises Roles
+
+role = Role.new
+role.character_name = "Bruce Wayne"
+role.movie_id = dark_knight_rises.id
+role.person_id = Person.where({name: "Christian Bale"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Commissioner Gordon"
+role.movie_id = dark_knight_rises.id
+role.person_id = Person.where({name: "Gary Oldman"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Bane"
+role.movie_id = dark_knight_rises.id
+role.person_id = Person.where({name: "Tom Hardy"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "John Blake"
+role.movie_id = dark_knight_rises.id
+role.person_id = Person.where({name: "Joseph Gordon-Levitt"})[0].id
+role.save
+
+role = Role.new
+role.character_name = "Selina Kyle"
+role.movie_id = dark_knight_rises.id
+role.person_id = Person.where({name: "Anne Hathaway"})[0].id
+role.save
+
+# /End of roles assignment
 
 # Prints a header for the movies output
 puts "Movies"
