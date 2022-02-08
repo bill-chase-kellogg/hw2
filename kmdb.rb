@@ -140,16 +140,16 @@ people.save
 
 # Begin Movie Insert
 
-director = People.where({name: "Christopher Nolan"})[0].id
+director = Person.where({name: "Christopher Nolan"})[0]
 
 values = {
     title: "Batman Begins",
     year_released: 2005,
     rated: "PG-13"
-    person_id: director
     }
 
 movies = Movie.new(values)
+movies.person_id = director.id
 movies.save
 
 values = {
@@ -159,6 +159,7 @@ values = {
     }
 
 movies = Movie.new(values)
+movies.person_id = director.id
 movies.save
 
 values = {
@@ -168,6 +169,7 @@ values = {
     }
 
     movies = Movie.new(values)
+    movies.person_id = director.id
     movies.save
 
 # End Movie Insert
