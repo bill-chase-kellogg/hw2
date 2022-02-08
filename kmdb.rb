@@ -78,14 +78,15 @@ Role.destroy_all
 
 # Generate models and tables, according to the domain model
 
-# I used 'rails generate model Movies/People/Roles to create the models'
-# Then I set up the tables in db/migrate/create_[model]
+# BC Notes //I used 'rails generate model Movies/People/Roles' to create the models
+# Then I set up the tables in db->migrate->create_[model name]
 # Then I ran 'rails db:migrate'
-# I committed the code before and after the migration for easy reference
+# I committed the code before and after the migration for easy reference // End of notes for this section
 
 # Insert data into your database that reflects the sample data shown above
 # Do not use hard-coded foreign key IDs.
 
+# Begin Movie Insert
 values = {
     title: "Batman Begins",
     year_released: 2005,
@@ -112,10 +113,72 @@ values = {
 
 movies = Movie.new(values)
 movies.save
-
+# End Movie Insert
+# Begin People Insert
+# Batman Begins
 people_list = {name: "Christopher Nolan"}
 people = Person.new(people_list)
 people.save 
+
+people_list = {name: "Christian Bale"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Michael Caine"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Liam Neeson"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Katie Holmes"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Gary Oldman"}
+people = Person.new(people_list)
+people.save 
+
+# The Dark Knight
+
+people_list = {name: "Heath Ledger"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Aaron Eckhart"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Maggie Gyllenhaal"}
+people = Person.new(people_list)
+people.save 
+
+# The Dark Knight Rises
+
+people_list = {name: "Tomy Hardy"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Joseph Gordon-Levitt"}
+people = Person.new(people_list)
+people.save 
+
+people_list = {name: "Anne Hathaway"}
+people = Person.new(people_list)
+people.save 
+
+# End People
+# Assigning Roles
+
+role = Role.new
+role.character_name = "Bruce Wayne"
+role.movie_id = Movie.where({title: "Batman Begins"})[0]
+role.person_id = Person.where({name: "Christian Bale"})[0]
+role.save
+
+
+# End of roles assignment
 
 # Prints a header for the movies output
 puts "Movies"
