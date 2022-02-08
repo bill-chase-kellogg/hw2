@@ -71,14 +71,51 @@
 
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
-# TODO!
+
+Movie.destroy_all
+Person.destroy_all
+Role.destroy_all
 
 # Generate models and tables, according to the domain model
-# TODO!
+
+# I used 'rails generate model Movies/People/Roles to create the models'
+# Then I set up the tables in db/migrate/create_[model]
+# Then I ran 'rails db:migrate'
+# I committed the code before and after the migration for easy reference
 
 # Insert data into your database that reflects the sample data shown above
 # Do not use hard-coded foreign key IDs.
-# TODO!
+
+values = {
+    title: "Batman Begins",
+    year_released: 2005,
+    rated: "PG-13"
+    }
+
+movies = Movie.new(values)
+movies.save
+
+values = {
+    title: "The Dark Knight",
+    year_released: 2008,
+    rated: "PG-13"
+    }
+
+movies = Movie.new(values)
+movies.save
+
+values = {
+    title: "The Dark Knight Rises",
+    year_released: 2012,
+    rated: "PG-13"
+    }
+
+movies = Movie.new(values)
+movies.save
+
+people_list = {name: "Christopher Nolan"}
+people = Person.new(people_list)
+people.save 
 
 # Prints a header for the movies output
 puts "Movies"
