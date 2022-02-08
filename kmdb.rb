@@ -146,6 +146,7 @@ values = {
     title: "Batman Begins",
     year_released: 2005,
     rated: "PG-13"
+ 
     }
 
 movies = Movie.new(values)
@@ -156,6 +157,7 @@ values = {
     title: "The Dark Knight",
     year_released: 2008,
     rated: "PG-13"
+   
     }
 
 movies = Movie.new(values)
@@ -166,6 +168,7 @@ values = {
     title: "The Dark Knight Rises",
     year_released: 2012,
     rated: "PG-13"
+  
     }
 
     movies = Movie.new(values)
@@ -176,18 +179,16 @@ values = {
 
 # Find Movie IDs
 
-batman_begins = Movie.where({title: "Batman Begins"})[0].id
-dark_knight = Movie.where({title: "The Dark Knight"})[0].id
-dark_knight_rises = Movie.where({title: "The Dark Knight Rises"})[0].id
+batman_begins = Movie.where({title: "Batman Begins"})[0]
+dark_knight = Movie.where({title: "The Dark Knight"})[0]
+dark_knight_rises = Movie.where({title: "The Dark Knight Rises"})[0]
 
 #Batman Begins Roles
 
 role = Role.new
 role.character_name = "Bruce Wayne"
-role.save
-role.movie_id = 
-role.save
-role.person_id = Person.where({name: "Christian Bale"})[0]
+role.movie_id = batman_begins.id
+role.person_id = Person.where({name: "Christian Bale"})[0].id
 role.save
 
 
@@ -214,4 +215,11 @@ puts "========"
 puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie
-# TODO!
+
+roles = Role.all
+
+for role in roles
+    movie = Movie.where({id: role.movie_id})[0]
+    person = Person.where({id: role.person_id})[0]
+    puts "#{movie.title} #{person.name} #{role.character_name}"
+end
